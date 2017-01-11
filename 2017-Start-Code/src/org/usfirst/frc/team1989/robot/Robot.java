@@ -1,4 +1,4 @@
-
+// This is an addition for the purposes of tryign to commit and sync.
 //Martin's Code
 
 package org.usfirst.frc.team1989.robot;
@@ -6,7 +6,6 @@ package org.usfirst.frc.team1989.robot;
 
 //import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
-//import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 //import edu.wpi.first.wpilibj.SPI;
