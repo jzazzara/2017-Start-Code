@@ -1,9 +1,10 @@
 package org.usfirst.frc.team1989.robot;
 
 import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.Timer;
 
-public class CANTalon1989 extends CANTalon {
+public class CANTalon1989 extends CANTalon{
 	public double maxI = 0.0; 
 	public double lasttimer;
 	public Timer t1= new Timer();
