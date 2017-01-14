@@ -1,7 +1,5 @@
 package org.usfirst.frc.team1989.robot;
 
-<<<<<<< HEAD
-
 //import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -11,10 +9,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.interfaces.Accelerometer;
-=======
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
->>>>>>> refs/remotes/origin/master
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -36,7 +32,7 @@ public class Robot extends IterativeRobot implements cmd{
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-<<<<<<< HEAD
+
 	int state = 0;
 	AnalogInput rf1;
 	double driveramp = 6.0;
@@ -54,14 +50,11 @@ public class Robot extends IterativeRobot implements cmd{
 // gyro;
 //		AnalogInput rf1 = new AnalogInput(0);
 //		Accelerometer b_acc;
-		JsScaled driveStick = new JsScaled(0);
+		
 		JsScaled uStick = new JsScaled(1);//The uStick will stand for the utility joystick responsible for shooting and arm movement
 		int autoStatus = 0;
 		int autoMode = 0;
-=======
->>>>>>> refs/remotes/origin/master
-	
-<<<<<<< HEAD
+
 	// Instantiating Timer
 	Timer t1 = new Timer();
 
@@ -70,8 +63,7 @@ public class Robot extends IterativeRobot implements cmd{
 
 	// Instantiating Joysticks
 
-	// Instantiating writmessage
-	writemessage wmsg = new writemessage();
+	
 
 	// ArcadeDriveCMD Constructor - 4 motors
 	MecDriveCmd aDrive = new MecDriveCmd(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor, driveStick);
@@ -81,17 +73,14 @@ public class Robot extends IterativeRobot implements cmd{
 
 	// RangeFinder
 
-	ShooterCmd shooter = new ShooterCmd(driveStick, s1);
-	ArmsCmd arms = new ArmsCmd(driveStick);
+
 
 	// ShooterCmd shooter2 = new ShooterCmd(driveStick, s1);
 	// ArmsCmd arms2 = new ArmsCmd(driveStick);
 
-=======
 	MecDrive mDrive = new MecDrive(frontLeft, frontRight, backLeft, backRight, driveStick);
 	
 	@Override
->>>>>>> refs/remotes/origin/master
 	public void robotInit() {
 	
 	}
