@@ -5,6 +5,7 @@ package org.usfirst.frc.team1989.robot;
 
 
 //import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -37,10 +38,10 @@ public class Robot extends IterativeRobot implements cmd{
 		public static double Kp = 0.03; // const for multiplying gyro angle 
 		
 		// Instantiating TalonSRX Motors
-		CANTalon1989 frontLeftMotor = new CANTalon1989(3);
-		CANTalon1989 frontRightMotor = new CANTalon1989(9);
+		CANTalon1989 frontLeftMotor = new CANTalon1989(2);
+		CANTalon1989 frontRightMotor = new CANTalon1989(1);
 		CANTalon1989 rearLeftMotor = new CANTalon1989(6);
-		CANTalon1989 rearRightMotor = new CANTalon1989(7);
+		CANTalon1989 rearRightMotor = new CANTalon1989(5);
 		
 // gyro;
 //		AnalogInput rf1 = new AnalogInput(0);
@@ -62,8 +63,7 @@ public class Robot extends IterativeRobot implements cmd{
 	writemessage wmsg = new writemessage();
 
 	// ArcadeDriveCMD Constructor - 4 motors
-	ArcadeDriveCmd aDrive = new ArcadeDriveCmd(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor,
-			driveStick);
+	MecDriveCmd aDrive = new MecDriveCmd(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor, driveStick);
 
 	// WHAT THE HECK IS THIS!!!! NO SUPPORT IN CLASSES!
 	// writemessage wmsg = new writemessage();
