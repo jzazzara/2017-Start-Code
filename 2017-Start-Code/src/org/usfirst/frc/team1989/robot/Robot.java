@@ -57,6 +57,7 @@ public class Robot extends IterativeRobot implements cmd{
 
 	// Instantiating Timer
 	Timer t1 = new Timer();
+	Timer pwmTimer = new Timer();
 
 	// Instantiating Servo
 	Servo s1 = new Servo(0);
@@ -82,7 +83,7 @@ public class Robot extends IterativeRobot implements cmd{
 	
 	@Override
 	public void robotInit() {
-	
+		SharedStuff.cmdlist.add(mDrive);
 	}
 
 	
@@ -103,6 +104,11 @@ public class Robot extends IterativeRobot implements cmd{
 	/**
 	 * This function is called periodically during operator control
 	 */
+	
+	
+	public void teleopInit(){
+		pwmTimer.start();
+	}
 	@Override
 	public void teleopPeriodic() {
 		for (int i = 0; i < SharedStuff.cmdlist.size(); i++) {
