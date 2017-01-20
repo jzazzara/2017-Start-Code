@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1989.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 
 public class JsScaled extends Joystick {
     public double low = .9; // set to 1 /full drive if above
@@ -9,6 +10,8 @@ public class JsScaled extends Joystick {
     public double pX = 0;
     public double pTwist = 0;
     public boolean[] buttons = new boolean[15];
+    public double cycleTime; //to be determined needs testing
+    Timer pwmTimer;
     
     public JsScaled(int port, double low, double deadzone) {
 	this(port);
@@ -70,4 +73,30 @@ public class JsScaled extends Joystick {
 	return v;
     }
 
+    
+    public double pwmDrive(double jsReading){  //method for modulating power sent to motors
+    	
+    	double driveTime = cycleTime * Math.abs(jsReading);// variable representing time spent driving
+    	if (jsReading <= .15 || jsReading >= -.15){ // deadzone used to prevent joystick from being to responsive
+    		return 0;
+    	} else{
+    		if(pwmTimer.get() <= driveTime){ //sounds power to motors for a percentage of cycletime based on joystick input
+    			if(jsReading > 0){ 
+    				return 1.0;
+    			}
+    			if(jsReading < 0){
+    				return -1.0;
+    			}
+    		} else if(pwmTimer.get() >= driveTime && pwmTimer.get() <= cycleTime ){ // kills power if over the desired percentage cycle time
+    			return 0.0;
+    		} else{ // resets the Timer and restarts it
+    			pwmTimer.stop();
+    			pwmTimer.reset();
+    			pwmTimer.start();
+    			return 0.0;
+    		}
+    		
+    	}
+		return 0.0;
+    }
 }

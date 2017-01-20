@@ -5,6 +5,7 @@ public class MecDriveCmd implements cmd {
 	 
 	RobotDrive driveTrain;
 	JsScaled driveStick;
+	Boolean pwmBoolean = false;
 	
 	public MecDriveCmd(SpeedController frontLeftMotor, SpeedController frontRightMotor, SpeedController backLeftMotor,
 			SpeedController backRightMotor, JsScaled driveStick){
@@ -23,7 +24,14 @@ public class MecDriveCmd implements cmd {
 	}
 	public void teleopInit(){}
 	public void teleopPeriodic(){
-		driveTrain.mecanumDrive_Cartesian(driveStick.sgetX(), driveStick.sgetY(), driveStick.sgetTwist(), 0);
+		
+		if(pwmBoolean == true){
+			driveTrain.mecanumDrive_Cartesian(driveStick.pwmDrive(driveStick.sgetX()), driveStick.pwmDrive(driveStick.sgetY()), 
+					driveStick.pwmDrive(driveStick.sgetTwist()), 0);
+		}else{
+			driveTrain.mecanumDrive_Cartesian(driveStick.sgetX(), driveStick.sgetY(), driveStick.sgetTwist(), 0);
+		}
+		
 	}
 	public void testInit(){}
 	public void testPeriodic(){}
