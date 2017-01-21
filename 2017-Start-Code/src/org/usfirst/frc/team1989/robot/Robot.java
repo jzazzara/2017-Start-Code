@@ -36,17 +36,16 @@ public class Robot extends IterativeRobot implements cmd{
 	int state = 0;
 	AnalogInput rf1;
 	double driveramp = 6.0;
+	int cycleCheck = 0;
 
 	// Not sure this is needed - will talk to Mr. Pirringer about it
 		public String type = ""; // holds class type
 		public static double Kp = 0.03; // const for multiplying gyro angle 
-		
-		// Instantiating TalonSRX Motors
-		CANTalon1989 frontLeftMotor = new CANTalon1989(2);
-		CANTalon1989 frontRightMotor = new CANTalon1989(1);
-		CANTalon1989 rearLeftMotor = new CANTalon1989(6);
-		CANTalon1989 rearRightMotor = new CANTalon1989(5);
-		
+		double currentTime; 
+		double lastTime;
+		double cycleTime;
+		double minTime ;
+		double maxTime;
 // gyro;
 //		AnalogInput rf1 = new AnalogInput(0);
 //		Accelerometer b_acc;
@@ -67,7 +66,7 @@ public class Robot extends IterativeRobot implements cmd{
 	
 
 	// ArcadeDriveCMD Constructor - 4 motors
-	MecDriveCmd aDrive = new MecDriveCmd(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor, driveStick);
+//	MecDriveCmd aDrive = new MecDriveCmd(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor, driveStick);
 
 	// WHAT THE HECK IS THIS!!!! NO SUPPORT IN CLASSES!
 	// writemessage wmsg = new writemessage();
@@ -84,6 +83,8 @@ public class Robot extends IterativeRobot implements cmd{
 	@Override
 	public void robotInit() {
 		SharedStuff.cmdlist.add(mDrive);
+		pwmTimer.start();
+		t1.start();
 	}
 
 	
@@ -94,7 +95,7 @@ public class Robot extends IterativeRobot implements cmd{
 
 	/**
 	 * This function is called periodically during autonomous
-	 */
+	 ?//*/
 	@Override
 	public void autonomousPeriodic() {
 		
@@ -107,13 +108,17 @@ public class Robot extends IterativeRobot implements cmd{
 	
 	
 	public void teleopInit(){
-		pwmTimer.start();
+		
 	}
 	@Override
 	public void teleopPeriodic() {
 		for (int i = 0; i < SharedStuff.cmdlist.size(); i++) {
 			SharedStuff.cmdlist.get(i).teleopPeriodic();
 	}
+		
+		
+		
+		
 	}
 
 	/**
@@ -122,5 +127,33 @@ public class Robot extends IterativeRobot implements cmd{
 	@Override
 	public void testPeriodic() {
 	}
+	
+	public void testCycleTime(){//cycle time test needs to be checked
+		if(cycleCheck == 1){
+			currentTime = t1.get();
+			cycleTime = currentTime - lastTime;
+			lastTime = currentTime;
+			if(minTime == 0 && maxTime == 0){
+				minTime = cycleTime;
+				maxTime = cycleTime;
+				System.out.print(minTime + ", " + maxTime);
+			}else if(cycleTime < minTime){
+				minTime = cycleTime;
+				System.out.print(minTime + ", " + maxTime);
+			}else if(cycleTime > maxTime){
+				maxTime = cycleTime;
+				System.out.print(minTime + ", " + maxTime);
+			}
+			
+			
+		}else if(cycleCheck == 0){//ignores the first iterm
+			cycleCheck = 1;
+			lastTime = t1.get();
+			minTime = 0.0;
+			maxTime = 0.0;
+		
+		}
+	}
 }
+	
 
