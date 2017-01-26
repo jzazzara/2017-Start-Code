@@ -23,10 +23,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot implements cmd{
 	
 	
-	CANTalon1989 frontLeft = new CANTalon1989(9);
-	CANTalon1989 frontRight = new CANTalon1989(1);
-	CANTalon1989 backLeft = new CANTalon1989(2);
-	CANTalon1989 backRight = new CANTalon1989(3);
+	CANTalon1989 frontLeft = new CANTalon1989(1);
+	CANTalon1989 frontRight = new CANTalon1989(2);
+	CANTalon1989 backLeft = new CANTalon1989(3);
+	CANTalon1989 backRight = new CANTalon1989(4);
 	JsScaled driveStick = new JsScaled(0);
 	/**
 	 * This function is run when the robot is first started up and should be

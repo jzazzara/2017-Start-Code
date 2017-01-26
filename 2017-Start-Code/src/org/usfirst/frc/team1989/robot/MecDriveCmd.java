@@ -7,13 +7,13 @@ public class MecDriveCmd implements cmd {
 	JsScaled driveStick;
 	Boolean pwmBoolean = false;
 	
-	public MecDriveCmd(SpeedController frontLeftMotor, SpeedController frontRightMotor, SpeedController backLeftMotor,
+	public MecDriveCmd(SpeedController frontLeftMotor, SpeedController backLeftMotor, SpeedController frontRightMotor,
 			SpeedController backRightMotor, JsScaled driveStick){
-		driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
+		driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 		this.driveStick = driveStick;
 	}
-	public MecDriveCmd(int frontLeftMotor, int frontRightMotor, int backLeftMotor, int backRightMotor, JsScaled driveStick){
-		driveTrain = new RobotDrive(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
+	public MecDriveCmd(int frontLeftMotor, int backLeftMotor, int frontRightMotor, int backRightMotor, JsScaled driveStick){
+		driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
 		this.driveStick = driveStick;
 	}
 	
@@ -25,12 +25,9 @@ public class MecDriveCmd implements cmd {
 	public void teleopInit(){}
 	public void teleopPeriodic(){
 		
-		if(pwmBoolean == true){
-			driveTrain.mecanumDrive_Cartesian(driveStick.pwmDrive(driveStick.sgetX()), driveStick.pwmDrive(driveStick.sgetY()), 
-					driveStick.pwmDrive(driveStick.sgetTwist()), 0);
-		}else{
-			driveTrain.mecanumDrive_Cartesian(driveStick.sgetX(), driveStick.sgetY(), driveStick.sgetTwist(), 0);
-		}
+		
+			driveTrain.mecanumDrive_Cartesian(driveStick.sgetY()/2, driveStick.sgetX()/2, driveStick.sgetTwist(), 0);
+		
 		
 	}
 	public void testInit(){}
