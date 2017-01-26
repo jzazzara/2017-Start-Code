@@ -78,7 +78,7 @@ public class Robot extends IterativeRobot implements cmd{
 	// ShooterCmd shooter2 = new ShooterCmd(driveStick, s1);
 	// ArmsCmd arms2 = new ArmsCmd(driveStick);
 
-	MecDriveCmd mDrive = new MecDriveCmd(frontLeft, frontRight, backLeft, backRight, driveStick);
+	MecDriveCmd mDrive = new MecDriveCmd(frontLeft, backLeft, frontRight, backRight, driveStick);
 	
 	@Override
 	public void robotInit() {
