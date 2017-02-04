@@ -23,10 +23,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot implements cmd{
 	
 	
-	CANTalon1989 frontLeft = new CANTalon1989(1);
-	CANTalon1989 frontRight = new CANTalon1989(2);
-	CANTalon1989 backLeft = new CANTalon1989(3);
-	CANTalon1989 backRight = new CANTalon1989(4);
+	CANTalon1989 frontLeft = new CANTalon1989(3);
+	CANTalon1989 frontRight = new CANTalon1989(9);
+	CANTalon1989 backLeft = new CANTalon1989(7);
+	CANTalon1989 backRight = new CANTalon1989(5);
+	CANTalon1989 climberLeft = new CANTalon1989(4);
+	CANTalon1989 climberRight = new CANTalon1989(2);
+	
 	
 
 
@@ -55,12 +58,15 @@ public class Robot extends IterativeRobot implements cmd{
 
 
 	MecDriveCmd mDrive = new MecDriveCmd(frontLeft, backLeft, frontRight, backRight, driveStick);
-	CameraControl camControl = new CameraControl(servoX, servoY, uStick);
+	CameraControl camControl = new CameraControl(servoX, servoY, driveStick);
 	@Override
 	public void robotInit() {
 		SharedStuff.cmdlist.add(mDrive);
 		SharedStuff.cmdlist.add(camControl);
+		camControl.cameraReset();
 		t1.start();
+		frontRight.setInverted(true);
+		backRight.setInverted(true);
 	}
 
 	
