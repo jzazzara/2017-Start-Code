@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 //import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 //import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -30,7 +31,7 @@ public class Robot extends IterativeRobot implements cmd{
 	CANTalon1989 climberLeft = new CANTalon1989(4);
 	CANTalon1989 climberRight = new CANTalon1989(2);
 	
-	
+	Gyro gyro;
 
 
 	
@@ -67,6 +68,15 @@ public class Robot extends IterativeRobot implements cmd{
 		t1.start();
 		frontRight.setInverted(true);
 		backRight.setInverted(true);
+		
+		try{
+			gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+			System.out.println("gyro connected");
+		}
+		catch (NullPointerException e){
+			gyro = null;
+			System.out.println("gyro not connected");
+		}
 	}
 
 	
@@ -97,7 +107,14 @@ public class Robot extends IterativeRobot implements cmd{
 		for (int i = 0; i < SharedStuff.cmdlist.size(); i++) {
 			SharedStuff.cmdlist.get(i).teleopPeriodic();
 	}
+		try{
+			gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 		
+		}
+		catch (NullPointerException e){
+			gyro = null;
+		
+		}
 		
 		
 		
