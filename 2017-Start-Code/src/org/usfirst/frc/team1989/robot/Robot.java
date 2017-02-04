@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 //import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 //import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -23,11 +24,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot implements cmd{
 	
 	
-	CANTalon1989 frontLeft = new CANTalon1989(1);
-	CANTalon1989 frontRight = new CANTalon1989(2);
-	CANTalon1989 backLeft = new CANTalon1989(3);
-	CANTalon1989 backRight = new CANTalon1989(4);
+	CANTalon1989 frontLeft = new CANTalon1989(3);
+	CANTalon1989 frontRight = new CANTalon1989(9);
+	CANTalon1989 backLeft = new CANTalon1989(7);
+	CANTalon1989 backRight = new CANTalon1989(5);
+	CANTalon1989 climberLeft = new CANTalon1989(4);
+	CANTalon1989 climberRight = new CANTalon1989(2);
 	
+	Gyro gyro;
 
 
 	
@@ -55,12 +59,24 @@ public class Robot extends IterativeRobot implements cmd{
 
 
 	MecDriveCmd mDrive = new MecDriveCmd(frontLeft, backLeft, frontRight, backRight, driveStick);
-	CameraControl camControl = new CameraControl(servoX, servoY, uStick);
+	CameraControl camControl = new CameraControl(servoX, servoY, driveStick);
 	@Override
 	public void robotInit() {
 		SharedStuff.cmdlist.add(mDrive);
 		SharedStuff.cmdlist.add(camControl);
+		camControl.cameraReset();
 		t1.start();
+		frontRight.setInverted(true);
+		backRight.setInverted(true);
+		
+		try{
+			gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+			System.out.println("gyro connected");
+		}
+		catch (NullPointerException e){
+			gyro = null;
+			System.out.println("gyro not connected");
+		}
 	}
 
 	
@@ -91,7 +107,14 @@ public class Robot extends IterativeRobot implements cmd{
 		for (int i = 0; i < SharedStuff.cmdlist.size(); i++) {
 			SharedStuff.cmdlist.get(i).teleopPeriodic();
 	}
+		try{
+			gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 		
+		}
+		catch (NullPointerException e){
+			gyro = null;
+		
+		}
 		
 		
 		
