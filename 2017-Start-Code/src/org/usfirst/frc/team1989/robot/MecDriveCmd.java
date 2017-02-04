@@ -5,22 +5,26 @@ import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import com.ctre.CANTalon;
 public class MecDriveCmd implements cmd {
 	 
+	
+	
+	CANTalon1989 frontLeft = new CANTalon1989(3);
+	CANTalon1989 frontRight = new CANTalon1989(9);
+	CANTalon1989 backLeft = new CANTalon1989(7);//encoder motor
+	CANTalon1989 backRight = new CANTalon1989(5);// encoder motor
+	
 	RobotDrive driveTrain;
 	JsScaled driveStick;
-	Boolean pwmBoolean = false;
-	Encoder backLeftWheel;
-	Encoder backRightWheel;
+	
+;
 	long encoderLeftCount;
 	long encoderRightCount;
 	
-	public MecDriveCmd(SpeedController frontLeftMotor, SpeedController backLeftMotor, SpeedController frontRightMotor,
-		SpeedController backRightMotor, JsScaled driveStick){
-		driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
+	
+	public MecDriveCmd(JsScaled driveStick){
+		driveTrain = new RobotDrive(frontLeft, backLeft, frontRight, backRight);
 		this.driveStick = driveStick;
-	}
-	public MecDriveCmd(int frontLeftMotor, int backLeftMotor, int frontRightMotor, int backRightMotor, JsScaled driveStick){
-		driveTrain = new RobotDrive(frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor);
-		this.driveStick = driveStick;
+		frontRight.setInverted(true);
+		backRight.setInverted(true);
 	}
 	
 
@@ -32,7 +36,7 @@ public class MecDriveCmd implements cmd {
 	public void teleopPeriodic(){
 		
 		
-			driveTrain.mecanumDrive_Cartesian(driveStick.sgetX()/2, driveStick.sgetY()/2, driveStick.sgetTwist(), 0);
+			driveTrain.mecanumDrive_Cartesian(driveStick.sgetX(), driveStick.sgetY(), driveStick.sgetTwist(), 0);
 		
 		
 	}
