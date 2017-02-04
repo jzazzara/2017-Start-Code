@@ -34,6 +34,7 @@ public class CameraControl implements cmd {
 			syValue += 0.05;
 
 		}
+		
 		counterCheck();
 		
 		servoX.set(sxValue);
