@@ -20,29 +20,32 @@ public class CameraControl implements cmd {
 	
 	public void cameraMovement(){
 		if(uStick.getPOV(0) == 270){
-			sxValue = sxValue - 0.05;
-			servoX.set(sxValue);
+			sxValue -= 0.05;
+			
 			
 		}
 		else if (uStick.getPOV(0) == 90){
-			sxValue = sxValue + 0.05;
-			servoX.set(sxValue);
+			sxValue += 0.05;
 		}
 		else if (uStick.getPOV(0) == 180){
-			syValue = syValue - 0.05;
-			servoY.set(syValue);
+			syValue -= 0.05;
 		}
-		else if (uStick.getPOV(0) == 360){
-			syValue = syValue + 0.05;
-			servoY.set(syValue);
+		else if (uStick.getPOV(0) == 0){
+			syValue += 0.05;
+
 		}
+		counterCheck();
+		
+		servoX.set(sxValue);
+		servoY.set(syValue);
 		
 	}
 	
+	
 	public void cameraReset(){
 		
-			servoX.setAngle(0.5);
-			servoY.setAngle(0.5);
+			servoX.set(0.5);
+			servoY.set(0.5);
 		
 	}
 	public void counterCheck(){
@@ -101,8 +104,6 @@ public class CameraControl implements cmd {
 		} else{
 			cameraMovement();
 		}
-		
-		counterCheck();
 	}
 	
 	

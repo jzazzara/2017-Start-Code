@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot implements cmd{
 
 	// Instantiating Servo
 	Servo servoX = new Servo(0);
-	Servo servoY = new Servo(1);
+	Servo servoY = new Servo(2);
 
 	// Instantiating Joysticks
 	JsScaled driveStick = new JsScaled(0);
@@ -69,14 +69,14 @@ public class Robot extends IterativeRobot implements cmd{
 		frontRight.setInverted(true);
 		backRight.setInverted(true);
 		
-		try{
-			gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
-			System.out.println("gyro connected");
-		}
-		catch (NullPointerException e){
-			gyro = null;
-			System.out.println("gyro not connected");
-		}
+		//try{
+			//gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+			//System.out.println("gyro connected");
+		//}
+		//catch (NullPointerException e){
+			//gyro = null;
+			//System.out.println("gyro not connected");
+		//}
 	}
 
 	
@@ -107,14 +107,14 @@ public class Robot extends IterativeRobot implements cmd{
 		for (int i = 0; i < SharedStuff.cmdlist.size(); i++) {
 			SharedStuff.cmdlist.get(i).teleopPeriodic();
 	}
-		try{
-			gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
+		//try{
+			//gyro = new ADXRS450_Gyro(SPI.Port.kOnboardCS0);
 		
-		}
-		catch (NullPointerException e){
-			gyro = null;
+		//}
+		//catch (NullPointerException e){
+			//gyro = null;
 		
-		}
+		//}
 		
 		
 		
